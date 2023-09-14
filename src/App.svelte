@@ -3,16 +3,19 @@
 	import CircleProgressBar from "./CircleProgressBar.svelte";
 
 	let employees = [];
-	var timePercent = 0;
+	let timePercent = 0;
 	let intervalId;
 	let isClockRunning = true;
+	let awards = Math.floor(Math.random() * 5);
+	let attendance = Math.floor(Math.random() * 12) + "/" + Math.floor(Math.random() * 29);
+	let leaves = Math.floor(Math.random() * 20);
 
 	async function fetchData() {
 		try {
 			const response = await fetch("https://randomuser.me/api/");
 			if (response.ok) {
 				const data = await response.json();
-				employees = data.results; 
+				employees = data.results;
 				console.log(employees);
 			} else {
 				console.error("Failed to fetch data from the API");
@@ -23,11 +26,6 @@
 	}
 
 	onMount(fetchData);
-
-	let awards = Math.floor(Math.random() * 5);
-	let attendance =
-		Math.floor(Math.random() * 12) + "/" + Math.floor(Math.random() * 29);
-	let leaves = Math.floor(Math.random() * 20);
 
 	function getRandomInt(min, max) {
 		return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -47,19 +45,16 @@
 		const totalSeconds = hours * 3600 + minutes * 60 + seconds;
 		const percentage = (totalSeconds / (8 * 3600)) * 100;
 		time = formatTime(hours, minutes, seconds);
-		timePercent = percentage.toFixed(2);
-		timePercent = timePercent * 0.001;
+		timePercent = (percentage * 0.001).toFixed(2);
 	}
 
 	function myFunction() {
 		if (isClockRunning) {
-			clearInterval(intervalId); // Stop the interval
+			clearInterval(intervalId);
 			isClockRunning = false;
 			document.getElementById("clock-message").innerHTML =
 				"Thanks for clocking out!";
 			document.getElementById("btn").innerHTML = "Clock In";
-
-			// Clear the message after 5 seconds
 			setTimeout(() => {
 				document.getElementById("clock-message").innerHTML = "";
 			}, 5000);
@@ -88,6 +83,7 @@
 			isClockRunning = true;
 		}
 	}
+
 	intervalId = setInterval(() => {
 		seconds++;
 		if (seconds >= 60) {
@@ -107,82 +103,84 @@
 
 <main>
 	{#each employees as employee}
-		<div class="container">
-			<div class="personal-row">
-				<div class="personal-info-left">
-					<img src={employee.picture.medium} alt="img" />
-					<p>{employee.name.first} {employee.name.last}</p>
-					<p>{employee.phone}</p>
-					<div class="attendance">
-						<div class="attendance-items">
-							<p>Awards</p>
-							<p>{awards}</p>
-						</div>
-						<div class="attendance-items">
-							<p>Attendance</p>
-							<p>{attendance}</p>
-						</div>
-						<div class="attendance-items">
-							<p>Leaves</p>
-							<p>{leaves}</p>
-						</div>
+	<div class="container">
+		<div class="personal-row">
+			<div class="personal-info-left">
+				<img src={employee.picture.medium} alt="img" />
+				<p>{employee.name.first} {employee.name.last}</p>
+				<p>{employee.phone}</p>
+				<div class="attendance">
+					<div class="attendance-items">
+						<p>Awards</p>
+						<p>{awards}</p>
 					</div>
-				</div>
-
-				<div class="personal-info-right">
-					<div class="personal-data-title">Personal Details</div>
-					<table>
-						<tr>
-							<td>Employee Name: </td>
-							<td>{employee.name.first} {employee.name.last}</td>
-						</tr>
-						<tr>
-							<td>Employee Email: </td>
-							<td>{employee.email}</td>
-						</tr>
-						<tr>
-							<td>Employee Gender: </td>
-							<td>{employee.gender}</td>
-						</tr>
-						<tr>
-							<td>Employee City: </td>
-							<td>{employee.location.city}</td>
-						</tr>
-						<tr>
-							<td>Employee Country: </td>
-							<td>{employee.location.country}</td>
-						</tr>
-						<tr>
-							<td>Employee Postal Code: </td>
-							<td>{employee.location.postcode}</td>
-						</tr>
-					</table>
-
-					<div class="clock-in-container">
-						<div class="personal-data-title">Time In</div>
-						<div class="circle">
-							Clocked in for
-							<span class="time">{time}</span>
-							<button id="btn" on:click={myFunction}>
-								Clock Out
-							</button>
-							<div id="clock-message" />
-						</div>
+					<div class="attendance-items">
+						<p>Attendance</p>
+						<p>{attendance}</p>
+					</div>
+					<div class="attendance-items">
+						<p>Leaves</p>
+						<p>{leaves}</p>
 					</div>
 				</div>
 			</div>
-			<div class="graph-container">
-				<CircleProgressBar progress={Math.random()} />
-				<CircleProgressBar progress={Math.random()} />
-				<CircleProgressBar progress={Math.random()} />
+
+			<div class="personal-info-right">
+				<div class="personal-data-title">Personal Details</div>
+				<table>
+					<tr>
+						<td>Employee Name: </td>
+						<td>{employee.name.first} {employee.name.last}</td>
+					</tr>
+					<tr>
+						<td>Employee Email: </td>
+						<td>{employee.email}</td>
+					</tr>
+					<tr>
+						<td>Employee Gender: </td>
+						<td>{employee.gender}</td>
+					</tr>
+					<tr>
+						<td>Employee City: </td>
+						<td>{employee.location.city}</td>
+					</tr>
+					<tr>
+						<td>Employee Country: </td>
+						<td>{employee.location.country}</td>
+					</tr>
+					<tr>
+						<td>Employee Postal Code: </td>
+						<td>{employee.location.postcode}</td>
+					</tr>
+				</table>
+
+				<div class="clock-in-container">
+					<div class="personal-data-title">Time In</div>
+					<div class="circle">
+						Clocked in for
+						<span class="time">{time}</span>
+						<button id="btn" on:click={myFunction}>
+							Clock Out
+						</button>
+						<div id="clock-message" />
+					</div>
+				</div>
 			</div>
 		</div>
+		<div class="graph-container">
+			<CircleProgressBar progress={Math.random()} />
+			<CircleProgressBar progress={Math.random()} />
+			<CircleProgressBar progress={Math.random()} />
+		</div>
+	</div>
 	{/each}
 </main>
 
 <style>
+	/* Fonts */
 	@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;400;800&family=Poppins:ital,wght@0,300;0,400;1,400&display=swap");
 
+	/* Container Styles */
 	.container {
 		display: flex;
 		flex-direction: column;
@@ -193,15 +191,16 @@
 		align-items: start;
 	}
 
+	/* Personal Row Styles */
 	.personal-row {
 		display: flex;
 		gap: 25px;
-
 		padding: 25px;
 		align-items: start;
 		width: 100%;
 	}
 
+	/* Personal Data Title Styles */
 	.personal-data-title {
 		background-color: #1098f7;
 		height: 50px;
@@ -214,6 +213,7 @@
 		width: 100%;
 	}
 
+	/* Personal Info Left Styles */
 	.personal-info-left {
 		display: flex;
 		flex-direction: column;
@@ -226,13 +226,14 @@
 		margin: 10px 0 0 0;
 	}
 
+	/* Attendance Items Styles */
 	.attendance-items {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		/* justify-content: center; */
 	}
 
+	/* Table Styles */
 	table {
 		font-family: arial, sans-serif;
 		border-collapse: collapse;
@@ -251,6 +252,7 @@
 		background-color: #e0e0e0;
 	}
 
+	/* Personal Info Right Styles */
 	.personal-info-right {
 		padding: 25px;
 		background: #f5f5f5;
@@ -259,6 +261,7 @@
 		width: 100%;
 	}
 
+	/* Attendance Styles */
 	.attendance p {
 		margin: 0;
 	}
@@ -277,12 +280,14 @@
 		border-radius: 6px;
 	}
 
+	/* Clock In Container Styles */
 	.clock-in-container {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 	}
 
+	/* Circle Styles */
 	.circle {
 		height: 300px;
 		display: flex;
@@ -295,12 +300,14 @@
 		font-size: 75px;
 	}
 
+	/* Personal Info Left Image Styles */
 	.personal-info-left img {
 		width: 100px;
 		box-shadow: 5.5px 11px 11px hsl(0deg 0% 0% / 0.33);
 		border-radius: 6px;
 	}
 
+	/* Button Styles */
 	button {
 		color: #333;
 		background-color: dodgerblue;
@@ -318,12 +325,14 @@
 		background-color: #4db2f9;
 	}
 
+	/* Graph Container Styles */
 	.graph-container {
 		display: flex;
 		justify-content: space-around;
 		width: 100%;
 	}
 
+	/* Media Query for Small Screens */
 	@media screen and (max-width: 600px) {
 		.container {
 			width: 100%;
@@ -338,7 +347,7 @@
 			flex-direction: column;
 			align-items: center;
 			width: 100%;
-			padding: 0;
+			padding: 25px 0;
 		}
 
 		.personal-info-left {
