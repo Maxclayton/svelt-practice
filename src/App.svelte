@@ -9,14 +9,8 @@
 	let attendance = Math.floor(Math.random() * 12) + "/" + Math.floor(Math.random() * 29);
 	let leaves = Math.floor(Math.random() * 20);
 	import {
-    blur,
-    crossfade,
-    draw,
-    fade,
     fly,
-    scale,
-    slide,
-  } from 'svelte/transition';
+    scale, } from 'svelte/transition';
 
 	async function fetchData() {
 		try {
