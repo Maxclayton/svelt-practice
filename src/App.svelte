@@ -3,12 +3,20 @@
 	import CircleProgressBar from "./CircleProgressBar.svelte";
 
 	let employees = [];
-	let timePercent = 0;
 	let intervalId;
 	let isClockRunning = true;
 	let awards = Math.floor(Math.random() * 5);
 	let attendance = Math.floor(Math.random() * 12) + "/" + Math.floor(Math.random() * 29);
 	let leaves = Math.floor(Math.random() * 20);
+	import {
+    blur,
+    crossfade,
+    draw,
+    fade,
+    fly,
+    scale,
+    slide,
+  } from 'svelte/transition';
 
 	async function fetchData() {
 		try {
@@ -45,7 +53,7 @@
 		const totalSeconds = hours * 3600 + minutes * 60 + seconds;
 		const percentage = (totalSeconds / (8 * 3600)) * 100;
 		time = formatTime(hours, minutes, seconds);
-		timePercent = (percentage * 0.001).toFixed(2);
+		// timePercent = (percentage * 0.001).toFixed(2);
 	}
 
 	function myFunction() {
@@ -105,7 +113,7 @@
 	{#each employees as employee}
 	<div class="container">
 		<div class="personal-row">
-			<div class="personal-info-left">
+			<div class="personal-info-left" transition:scale>
 				<img src={employee.picture.medium} alt="img" />
 				<p>{employee.name.first} {employee.name.last}</p>
 				<p>{employee.phone}</p>
@@ -128,27 +136,27 @@
 			<div class="personal-info-right">
 				<div class="personal-data-title">Personal Details</div>
 				<table>
-					<tr>
+					<tr transition:fly={{ x: 30 }}>
 						<td>Employee Name: </td>
 						<td>{employee.name.first} {employee.name.last}</td>
 					</tr>
-					<tr>
+					<tr transition:fly={{ x: -30 }}>
 						<td>Employee Email: </td>
 						<td>{employee.email}</td>
 					</tr>
-					<tr>
+					<tr transition:fly={{ x: 30 }}>
 						<td>Employee Gender: </td>
 						<td>{employee.gender}</td>
 					</tr>
-					<tr>
+					<tr transition:fly={{ x: -30 }}>
 						<td>Employee City: </td>
 						<td>{employee.location.city}</td>
 					</tr>
-					<tr>
+					<tr transition:fly={{ x: 30 }}>
 						<td>Employee Country: </td>
 						<td>{employee.location.country}</td>
 					</tr>
-					<tr>
+					<tr transition:fly={{ x: -30 }}>
 						<td>Employee Postal Code: </td>
 						<td>{employee.location.postcode}</td>
 					</tr>
@@ -156,7 +164,7 @@
 
 				<div class="clock-in-container">
 					<div class="personal-data-title">Time In</div>
-					<div class="circle">
+					<div class="circle" transition:scale>
 						Clocked in for
 						<span class="time">{time}</span>
 						<button id="btn" on:click={myFunction}>
@@ -168,9 +176,15 @@
 			</div>
 		</div>
 		<div class="graph-container">
-			<CircleProgressBar progress={Math.random()} />
-			<CircleProgressBar progress={Math.random()} />
-			<CircleProgressBar progress={Math.random()} />
+			<div transition:scale>
+				<CircleProgressBar progress={Math.random()} />
+			</div>
+			<div transition:scale>
+				<CircleProgressBar progress={Math.random()} />
+			</div>
+			<div transition:scale>
+				<CircleProgressBar progress={Math.random()} />
+			</div>
 		</div>
 	</div>
 	{/each}
