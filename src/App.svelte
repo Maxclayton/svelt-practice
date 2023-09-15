@@ -176,13 +176,13 @@
 			</div>
 		</div>
 		<div class="graph-container">
-			<div transition:scale>
+			<div transition:fly={{ delay: 250, duration: 300, x: 100, y: 500, opacity: 0.5 }}>
 				<CircleProgressBar progress={Math.random()} />
 			</div>
-			<div transition:scale>
+			<div transition:fly={{ delay: 350, duration: 300, x: 100, y: 500, opacity: 0.5 }}>
 				<CircleProgressBar progress={Math.random()} />
 			</div>
-			<div transition:scale>
+			<div transition:fly={{ delay: 450, duration: 300, x: 100, y: 300, opacity: 0.5 }}>
 				<CircleProgressBar progress={Math.random()} />
 			</div>
 		</div>
