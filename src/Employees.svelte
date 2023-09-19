@@ -210,8 +210,7 @@ async function fetchData() {
 		border-radius: 6px;
 	}
 
-	td,
-	th {
+	td {
 		border: 1px solid #e0e0e0;
 		text-align: left;
 		padding: 8px;
