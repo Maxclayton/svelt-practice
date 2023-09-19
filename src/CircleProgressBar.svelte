@@ -1,11 +1,13 @@
 <script>
 	export let progress
 	const angle = 360 * progress
+  export let color = 'blue';
+
 	
 	// Adapt the logic according to the approach
 	const	background = `radial-gradient(white 50%, transparent 51%),
     conic-gradient(transparent 0deg ${angle}deg, gainsboro ${angle}deg 360deg),
-    conic-gradient(green 0deg, green 90deg, green 180deg, green);`;
+    conic-gradient(${color} 0deg, ${color} 90deg, ${color} 180deg, ${color});`;
 	
 	$: cssVarStyles = `--background:${background}`
 </script>
