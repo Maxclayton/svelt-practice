@@ -45,7 +45,7 @@
             document.getElementById("btn").innerHTML = "Clock In";
             setTimeout(() => {
                 visible = false;
-            }, 2000);
+            }, 1900);
         } else {
             clockMessage = 'Thanks for clocking in!';
             visible = true;
@@ -54,7 +54,7 @@
                 visible = false;
                 clockMessage = 'Thanks for clocking out!';
 
-            }, 2000);
+            }, 1900);
             intervalId = setInterval(() => {
                 seconds++;
                 if (seconds >= 60) {
