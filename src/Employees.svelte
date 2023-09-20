@@ -1,18 +1,17 @@
 <script>
-import { onMount } from "svelte";
-import { fly, scale, } from 'svelte/transition';
-import ClockIn from './ClockIn.svelte';
-import ProgressCircles from "./ProgressCircles.svelte";
-import Fa from 'svelte-fa';
-import { faCalendar, faList, faCalculator, faUser } from '@fortawesome/free-solid-svg-icons';
-import { Motion } from 'svelte-motion'
+    import { onMount } from "svelte";
+    import { fly, scale, } from 'svelte/transition';
+	import ClockIn from './ClockIn.svelte';
+	import ProgressCircles from "./ProgressCircles.svelte";
+
+    import './main.css';
 
 
-let awards = Math.floor(Math.random() * 5);
-let attendance = Math.floor(Math.random() * 12) + "/" + Math.floor(Math.random() * 29);
-let leaves = Math.floor(Math.random() * 20);
-let employees = [];
-
+    let awards = Math.floor(Math.random() * 5);
+	let attendance = Math.floor(Math.random() * 12) + "/" + Math.floor(Math.random() * 29);
+	let leaves = Math.floor(Math.random() * 20);
+    let employees = [];
+	
 
 
 async function fetchData() {
@@ -57,32 +56,10 @@ async function fetchData() {
 							<p>{leaves}</p>
 						</div>
 					</div>
-					<div class="employee-item-container">
-						<Motion let:motion whileHover={{scale:1.09}} class="icon-holder">
-							<div use:motion class='employee-item'>
-								<h3>Schedule</h3>
-								<Fa icon={faCalendar} rotate={0} />
-							</div>
-						</Motion>
-
-						<Motion let:motion whileHover={{scale:1.09}} class="icon-holder">
-							<div use:motion class='employee-item'>
-								<h3>List</h3>
-								<Fa icon={faList} rotate={0} />
-							</div>
-						</Motion>
-						<Motion let:motion whileHover={{scale:1.09}} class="icon-holder">
-							<div use:motion class='employee-item'>
-								<h3>Calculator</h3>
-								<Fa icon={faCalculator} rotate={0} />
-							</div>
-						</Motion>
-
-					</div>
 				</div>
 
 				<div class="personal-info-right">
-					<div class="personal-data-title"><Fa icon={faUser}/>Personal Details</div>
+					<div class="personal-data-title">Personal Details</div>
 					<table>
 						<tr transition:fly={{ x: 30 }}>
 							<td>Employee Name: </td>
@@ -124,6 +101,7 @@ async function fetchData() {
 
 <style>
 
+    	/* Container Styles */
 	.container {
 		display: flex;
 		flex-direction: column;
@@ -132,30 +110,6 @@ async function fetchData() {
 		padding: 25px;
 		align-items: start;
 	}
-
-	.employee-item {
-    width: 200px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
-    border: 2px solid;
-    border-radius: 10px;
-	transition: .2s;
-	cursor: pointer;
-	}
-
-	.employee-item-container {
-		margin-top: 25px;
-		display: flex;
-		flex-direction: column;
-		gap: 10px;
-	}
-
-	.employee-item:hover {
-    background-color: #1098f7;
-    color: white;
-}
 
     .personal-data-title {
 		background-color: #1098f7;
@@ -167,7 +121,6 @@ async function fetchData() {
 		font-size: 20px;
 		font-family: "Poppins", sans-serif;
 		width: 100%;
-		gap: 10px;
 	}
 
 
@@ -272,21 +225,12 @@ async function fetchData() {
 		}
 
 		.personal-info-left {
-			width: 100%;
+			width: auto;
 		}
 
 		.personal-info-right {
 			width: 100%;
 			padding: 0;
-		}
-
-		.employee-item {
-			width: 100%;
-		}
-
-
-		.employee-item-container {
-			width: 100%;
 		}
 	}
 
