@@ -23,7 +23,7 @@ $: {
   }  else if (progress >= 50) {
     circleText = '🤔';
   } else {
-    circleText = '🤮';
+    circleText = '😵';
   }
 }
 </script>

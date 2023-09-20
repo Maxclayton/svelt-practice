@@ -4,6 +4,8 @@
   import CircleProgressBar from "./CircleProgressBar.svelte"; 
   import './main.css';
   import { onMount } from 'svelte';
+    import Fa from 'svelte-fa';
+    import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
   let colors = ['blue', 'green', 'red']
   var count = 0;
   let bars = [
@@ -11,12 +13,6 @@
   // { delay: 350, duration: 300, x: 100, y: 500, opacity: 0.5, progress: Math.random(), color: colors[count + 1] },
   // { delay: 450, duration: 300, x: 100, y: 300, opacity: 0.5, progress: Math.random(), color: colors[count + 2] }
 ];
-let showBars = false; 
-onMount(() => {
-setTimeout(() => {
-  showBars = true;
-}, 250);
-});
 
    function determineColor(progress) {
         if (progress >= 75) {
@@ -33,28 +29,24 @@ setTimeout(() => {
         });
     }
 
+
+
 </script>
 <main>
 <div class="graph-container">
     {#each bars as bar (bar.progress)}
-      {#if showBars}
       <div class='circle-container' >
         <CircleProgressBar  progress={bar.progress / 100} color={bar.color}  />
-          <input
-          id="progress-value"
-          type="number"
-          max="100"
-          min="1"
-          bind:value={bar.progress}
-          on:input={(event) => {
-            // Ensure the progress value is within the valid range
-            const newValue = Math.min(100, Math.max(1, event.target.value));
-            bar.progress = newValue;
-          }}
-        >
+        <div class='progress-buttons'>
+          <button on:click={() => (bar.progress = bar.progress + 1)}><Fa icon={faPlus}/></button>
+          <div class='progress'>{bar.progress}</div>
+          <button on:click={() => (bar.progress = bar.progress - 1)}><Fa icon={faMinus}/></button>
+
+        </div>
+
+
       </div>
 
-      {/if}
     {/each}
   </div>
 </main>
@@ -67,10 +59,26 @@ setTimeout(() => {
   justify-content: center;
   gap: 10px;
 }
-#progress-value {
-  height: 20px;
-  border-radius: 3px;
-  width: 100px;
+.progress-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-buttons button {
+  margin: 0;
+  outline: none;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    border: none;
+    font-size: 30px;
+}
+
+.progress {
+  font-size: 25px;
 }
     /* Graph Container Styles */
 .graph-container {
