@@ -3,6 +3,8 @@
     import { fly, scale, } from 'svelte/transition';
 	import ClockIn from './ClockIn.svelte';
 	import ProgressCircles from "./ProgressCircles.svelte";
+	import Fa from 'svelte-fa';
+    import { faUser } from '@fortawesome/free-solid-svg-icons';
 
     import './main.css';
 
@@ -59,7 +61,7 @@ async function fetchData() {
 				</div>
 
 				<div class="personal-info-right">
-					<div class="personal-data-title">Personal Details</div>
+					<div class="personal-data-title"><Fa icon={faUser}/>Personal Details</div>
 					<table>
 						<tr transition:fly={{ x: 30 }}>
 							<td>Employee Name: </td>
@@ -121,6 +123,7 @@ async function fetchData() {
 		font-size: 20px;
 		font-family: "Poppins", sans-serif;
 		width: 100%;
+		gap: 10px;
 	}
 
 

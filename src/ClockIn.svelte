@@ -1,12 +1,19 @@
 <script>
-    import { scale } from "svelte/transition";
+    import { scale, fly, fade } from "svelte/transition";
     import './main.css';
     import { onMount } from 'svelte';
+    import Fa from 'svelte-fa';
+    import { faClock } from '@fortawesome/free-solid-svg-icons';
 
     let showBars = false; // Flag to control when to show the bars
-
     let intervalId;
     let isClockRunning = true;
+    let hours = getRandomInt(0, 7.99);
+    let minutes = getRandomInt(0, 59);
+    let seconds = getRandomInt(0, 59);
+    let time = 0;
+    let visible = false;
+    let clockMessage = 'Thanks for clocking out!'
 
     onMount(() => {
     // After a delay, set the showBars flag to true to trigger the animation
@@ -19,10 +26,6 @@
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    let hours = getRandomInt(0, 7.99);
-    let minutes = getRandomInt(0, 59);
-    let seconds = getRandomInt(0, 59);
-    let time = 0;
 
     function formatTime(hours, minutes, seconds) {
         const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
@@ -31,34 +34,27 @@
 
     function updatePercentage() {
         const totalSeconds = hours * 3600 + minutes * 60 + seconds;
-        const percentage = (totalSeconds / (8 * 3600)) * 100;
         time = formatTime(hours, minutes, seconds);
     }
 
     function myFunction() {
         if (isClockRunning) {
             clearInterval(intervalId);
+            clockMessage = 'Thanks for clocking out!';
             isClockRunning = false;
-            document.getElementById("clock-message").innerHTML =
-                "Thanks for clocking out!";
+            visible = true;
             document.getElementById("btn").innerHTML = "Clock In";
             setTimeout(() => {
-                // visible = false;
-                document.getElementById("clock-message").innerHTML =
-                "";
-            }, 1900);
+                visible = false;
+            }, 2000);
         } else {
-            // clockMessage = 'Thanks for clocking in!';
-            // visible = true;
-            document.getElementById("clock-message").innerHTML =
-                "Thanks for clocking in!";
+            clockMessage = 'Thanks for clocking in!';        
+            visible = true;
             document.getElementById("btn").innerHTML = "Clock Out";
             setTimeout(() => {
-                // visible = false;
-                // clockMessage = 'Thanks for clocking out!';
-                document.getElementById("clock-message").innerHTML =
-                "";
-            }, 1900);
+                visible = false;
+                clockMessage = 'Thanks for clocking out!';
+            }, 2000);
             intervalId = setInterval(() => {
                 seconds++;
                 if (seconds >= 60) {
@@ -99,12 +95,17 @@
     {#if showBars}
 
     <div class="clock-in-container">
-        <div class="personal-data-title">Time In</div>
+        <div class="personal-data-title"><Fa icon={faClock}/>Time In</div>
         <div class="circle" transition:scale>
             Clocked in for
             <span class="time">{time}</span>
             <button id="btn" on:click={myFunction}> Clock Out </button>
-            <div id="clock-message" />
+            {#if visible}
+            <p in:fade out:fly={{ y: 200, duration: 2000 }}>
+                {clockMessage}
+            </p>
+            {/if}
+        
         </div>
     </div>
     {/if}
@@ -124,6 +125,7 @@
         font-size: 20px;
         font-family: "Poppins", sans-serif;
         width: 100%;
+        gap: 10px;
     }
 
     /* Clock In Container Styles */
@@ -141,6 +143,11 @@
         flex-direction: column;
         justify-content: center;
     }
+
+    .circle p {
+    position: absolute;
+    margin-top: 200px;
+}
 
     .circle span {
         font-size: 75px;
