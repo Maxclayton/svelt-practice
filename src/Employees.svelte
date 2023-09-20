@@ -21,7 +21,7 @@ async function fetchData() {
 			if (response.ok) {
 				const data = await response.json();
 				employees = data.results;
-				console.log(employees);
+				// console.log(employees);
 			} else {
 				console.error("Failed to fetch data from the API");
 			}
