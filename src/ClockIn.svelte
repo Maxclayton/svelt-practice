@@ -45,15 +45,14 @@
             document.getElementById("btn").innerHTML = "Clock In";
             setTimeout(() => {
                 visible = false;
-            }, 5000);
+            }, 2000);
         } else {
             clockMessage = 'Thanks for clocking in!';
-            console.log(clockMessage);
             visible = true;
             document.getElementById("btn").innerHTML = "Clock In";
             setTimeout(() => {
                 visible = false;
-            }, 5000);
+            }, 2000);
             intervalId = setInterval(() => {
                 seconds++;
                 if (seconds >= 60) {
