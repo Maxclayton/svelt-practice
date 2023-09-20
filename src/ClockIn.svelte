@@ -49,9 +49,11 @@
         } else {
             clockMessage = 'Thanks for clocking in!';
             visible = true;
-            document.getElementById("btn").innerHTML = "Clock In";
+            document.getElementById("btn").innerHTML = "Clock Out";
             setTimeout(() => {
                 visible = false;
+                clockMessage = 'Thanks for clocking out!';
+
             }, 2000);
             intervalId = setInterval(() => {
                 seconds++;
