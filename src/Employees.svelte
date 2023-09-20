@@ -15,8 +15,6 @@ let employees = [];
 
 
 
-
-
 async function fetchData() {
 		try {
 			const response = await fetch("https://randomuser.me/api/");

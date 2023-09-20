@@ -539,7 +539,7 @@ rollup-pluginutils@^2.6.0:
   dependencies:
     estree-walker "^0.6.1"
 
-rollup@^1.20.0||^2.0.0||^3.0.0, rollup@^2.68.0||^3.0.0, rollup@^2.78.0||^3.0.0, "rollup@^2.x || ^3.x", rollup@^3.29.2, rollup@<4, rollup@>=2.0.0:
+rollup@^3.29.2:
   version "3.29.2"
   resolved "https://registry.npmjs.org/rollup/-/rollup-3.29.2.tgz"
   integrity sha512-CJouHoZ27v6siztc21eEQGo0kIcE5D1gVPA571ez0mMYb25LGYGKnVNXpEj5MGlepmDWGXNjDB5q7uNiPHC11A==
@@ -652,7 +652,7 @@ svelte-motion@^0.11.5:
     style-value-types "5.1.2"
     tslib "^2.2.0"
 
-svelte@^3.35.0, svelte@^3.55.0, svelte@>=3.5.0:
+svelte@^3.55.0:
   version "3.59.2"
   resolved "https://registry.npmjs.org/svelte/-/svelte-3.59.2.tgz"
   integrity sha512-vzSyuGr3eEoAtT/A6bmajosJZIUWySzY2CzB3w2pgPvnkUjGqlDnsNnA0PMO+mMAhuyMul6C2uuZzY6ELSkzyA==
