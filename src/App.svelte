@@ -8,5 +8,4 @@
 </main>
 
 <style>
-	/* Fonts */
 </style>

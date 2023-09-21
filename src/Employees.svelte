@@ -117,12 +117,12 @@ async function fetchData() {
 	}
 
     .personal-data-title {
-		background-color: #1098f7;
+		background-color: var(--main-blue);
 		height: 50px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: white;
+		color: #FFF;
 		font-size: 20px;
 		font-family: "Poppins", sans-serif;
 		width: 100%;
@@ -168,13 +168,13 @@ async function fetchData() {
 	}
 
 	td {
-		border: 1px solid #e0e0e0;
+		border: 1px solid var(--main-white);
 		text-align: left;
 		padding: 8px;
 	}
 
 	tr:nth-child(even) {
-		background-color: #e0e0e0;
+		background-color: var(--main-white);
 	}
 
 	/* Personal Info Right Styles */
@@ -200,7 +200,7 @@ async function fetchData() {
 		height: 30px;
 		align-items: center;
 		margin-top: 15px;
-		color: white;
+		color: #FFF;
 		padding: 10px;
 		border-radius: 6px;
 	}

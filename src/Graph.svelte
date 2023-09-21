@@ -99,7 +99,7 @@
 	}
 
 	.tick line {
-		stroke: #e2e2e2;
+		stroke: var(--main-white);
 		stroke-dasharray: 2;
 	}
 

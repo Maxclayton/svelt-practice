@@ -116,7 +116,7 @@
 
     /* Personal Data Title Styles */
     .personal-data-title {
-        background-color: #1098f7;
+        background-color: var(--main-blue);
         height: 50px;
         display: flex;
         align-items: center;
@@ -156,7 +156,7 @@
     /* Button Styles */
     button {
         color: #333;
-        background-color: dodgerblue;
+        background-color: var(--main-blue);
         outline: none;
         width: 200px;
         color: white;
