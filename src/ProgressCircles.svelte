@@ -1,11 +1,10 @@
 
 <script>
-  import {fly} from 'svelte/transition';
   import CircleProgressBar from "./CircleProgressBar.svelte"; 
   import './main.css';
-  import { onMount } from 'svelte';
-    import Fa from 'svelte-fa';
-    import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+  import Fa from 'svelte-fa';
+  import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+  
   let colors = ['blue', 'green', 'red']
   var count = 0;
   let bars = [
@@ -75,6 +74,8 @@
     height: 100px;
     border: none;
     font-size: 30px;
+    cursor: pointer;
+
 }
 
 .progress {

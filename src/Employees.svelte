@@ -5,6 +5,7 @@
 	import ProgressCircles from "./ProgressCircles.svelte";
 	import Fa from 'svelte-fa';
     import { faUser } from '@fortawesome/free-solid-svg-icons';
+	import Graph from './Graph.svelte';
 
     import './main.css';
 
@@ -12,7 +13,7 @@
     let awards = Math.floor(Math.random() * 5);
 	let attendance = Math.floor(Math.random() * 12) + "/" + Math.floor(Math.random() * 29);
 	let leaves = Math.floor(Math.random() * 20);
-    let employees = [];
+   	export let employees = [];
 	
 
 
@@ -91,6 +92,8 @@ async function fetchData() {
 
 					<ClockIn />
 					<ProgressCircles />
+					<Graph />
+
 				</div>
 	
 
