@@ -59,6 +59,8 @@ async function fetchData() {
 							<p>{leaves}</p>
 						</div>
 					</div>
+					<a href='https://coruscating-nasturtium-0eba95.netlify.app/'>Link to another Svelte example project</a>
+
 				</div>
 
 				<div class="personal-info-right">
